@@ -2,6 +2,29 @@
 
 Una calculadora Android con un truco mágico secreto que se comunica con un ESP32 para mostrar cartas en las redes WiFi.
 
+[![Build Android APK](https://github.com/Mario1988123/CALCULADORAWIFI/actions/workflows/build-apk.yml/badge.svg)](https://github.com/Mario1988123/CALCULADORAWIFI/actions/workflows/build-apk.yml)
+
+## 📦 Descarga Rápida
+
+### 📱 APK de Android
+**¡Descarga directa sin compilar!**
+
+1. Ve a la pestaña [**Actions**](https://github.com/Mario1988123/CALCULADORAWIFI/actions)
+2. Busca el workflow **"Build Android APK"**
+3. Descarga el archivo **CalculadoraWiFi-APK** de la última ejecución exitosa
+4. Instala en tu Android
+
+📖 **Instrucciones detalladas:** [DESCARGAR_APK.md](DESCARGAR_APK.md)
+
+### 🔌 Código ESP32
+- **Archivo:** [`ESP32_CODE.ino`](ESP32_CODE.ino)
+- **Librerías:** [`LIBRERIAS_ESP32.txt`](LIBRERIAS_ESP32.txt) (instrucciones completas de instalación)
+
+### 📚 Guías
+- 🚀 [**Guía Rápida**](GUIA_RAPIDA.md) - Cómo realizar el truco
+- 📥 [**Descargar APK**](DESCARGAR_APK.md) - Instrucciones de descarga e instalación
+- 📋 [**Librerías ESP32**](LIBRERIAS_ESP32.txt) - Setup completo del ESP32
+
 ## 📱 Características
 
 ### Modo Normal
@@ -58,24 +81,44 @@ La combinación es de 3 dígitos: **XYZ**
 
 ## 🔧 Instalación
 
-### Requisitos
+### Opción 1: Descarga Directa (Recomendado) ⚡
+**¡No necesitas compilar nada!**
+
+1. Ve a [GitHub Actions](https://github.com/Mario1988123/CALCULADORAWIFI/actions)
+2. Descarga la APK compilada automáticamente
+3. Instala en tu Android
+
+📖 [Ver guía completa de descarga](DESCARGAR_APK.md)
+
+### Opción 2: Compilar desde Código
+Si prefieres compilar manualmente:
+
+#### Requisitos
 - Android Studio
 - Android SDK 24 o superior
+- JDK 17
 - Dispositivo Android físico o emulador
 
-### Pasos
+#### Pasos
 1. Clona el repositorio:
 ```bash
 git clone https://github.com/Mario1988123/CALCULADORAWIFI.git
+cd CALCULADORAWIFI
 ```
 
 2. Abre el proyecto en Android Studio
 
-3. Sincroniza Gradle
+3. Sincroniza Gradle (automático)
 
 4. Conecta tu dispositivo Android o inicia un emulador
 
-5. Ejecuta la aplicación
+5. Ejecuta la aplicación (Run → Run 'app')
+
+#### O compila desde terminal:
+```bash
+./gradlew assembleRelease
+# La APK estará en: app/build/outputs/apk/release/
+```
 
 ## 🎭 Funcionamiento del Truco
 
@@ -89,7 +132,21 @@ git clone https://github.com/Mario1988123/CALCULADORAWIFI.git
 
 ## 🛠️ Configuración del ESP32
 
-El código del ESP32 debe estar ejecutándose con:
+### Descarga el código
+- **Archivo:** [`ESP32_CODE.ino`](ESP32_CODE.ino)
+- **Librerías e instrucciones:** [`LIBRERIAS_ESP32.txt`](LIBRERIAS_ESP32.txt)
+
+### Librerías Necesarias
+Todas las librerías vienen con el ESP32 Arduino Core:
+- ✅ WiFi.h (incluida)
+- ✅ WebServer.h (incluida)
+- ✅ esp_wifi.h (incluida)
+- ✅ DNSServer.h (incluida)
+
+📖 [Ver guía completa de instalación](LIBRERIAS_ESP32.txt)
+
+### Red WiFi Creada
+El ESP32 crea automáticamente:
 - SSID del AP: **Mm_wifi**
 - Contraseña: **12345678**
 - IP Local: **192.168.4.1**

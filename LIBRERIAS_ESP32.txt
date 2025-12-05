@@ -1,0 +1,186 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║              LIBRERÍAS NECESARIAS PARA ESP32                      ║
+║                  Calculadora WiFi - Truco de Cartas               ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+📋 REQUISITOS PREVIOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Arduino IDE 1.8.19 o superior (o Arduino IDE 2.x)
+2. Placa ESP32 compatible (ESP32-WROOM, ESP32-DevKit, etc.)
+3. Cable USB para conectar el ESP32
+
+
+📦 INSTALACIÓN DE LIBRERÍAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Las siguientes librerías están INCLUIDAS en el paquete ESP32 de Arduino:
+
+✅ WiFi.h
+   └─ Incluida con ESP32 Arduino Core
+   └─ No requiere instalación adicional
+
+✅ WebServer.h
+   └─ Incluida con ESP32 Arduino Core
+   └─ No requiere instalación adicional
+
+✅ esp_wifi.h
+   └─ Incluida con ESP32 Arduino Core
+   └─ Funciones de bajo nivel para WiFi
+   └─ No requiere instalación adicional
+
+✅ DNSServer.h (OPCIONAL - Si no funciona, comentar las líneas DNS)
+   └─ Puede estar incluida con ESP32 Arduino Core
+   └─ Si no está, se puede descargar manualmente
+
+
+🔧 CONFIGURACIÓN DEL ARDUINO IDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PASO 1: Instalar soporte para ESP32
+────────────────────────────────────
+
+1. Abre Arduino IDE
+2. Ve a: Archivo → Preferencias
+3. En "Gestor de URLs Adicionales de Tarjetas", añade:
+
+   https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+4. Haz clic en "OK"
+5. Ve a: Herramientas → Placa → Gestor de tarjetas
+6. Busca "esp32" por Espressif Systems
+7. Instala "esp32" versión 2.0.0 o superior
+8. Espera a que termine la instalación
+
+
+PASO 2: Configurar la placa
+────────────────────────────
+
+1. Ve a: Herramientas → Placa → ESP32 Arduino
+2. Selecciona tu modelo (ejemplo: "ESP32 Dev Module")
+3. Configura los siguientes parámetros:
+
+   ┌─────────────────────────────────┬──────────────────┐
+   │ Parámetro                       │ Valor            │
+   ├─────────────────────────────────┼──────────────────┤
+   │ Upload Speed                    │ 115200           │
+   │ CPU Frequency                   │ 240MHz (WiFi/BT) │
+   │ Flash Frequency                 │ 80MHz            │
+   │ Flash Mode                      │ QIO              │
+   │ Flash Size                      │ 4MB (32Mb)       │
+   │ Partition Scheme                │ Default 4MB...   │
+   │ Core Debug Level                │ None             │
+   │ PSRAM                           │ Disabled         │
+   └─────────────────────────────────┴──────────────────┘
+
+4. Selecciona el puerto COM correcto en: Herramientas → Puerto
+
+
+📂 CARGAR EL CÓDIGO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abre el archivo: ESP32_CODE.ino
+2. Verifica que todas las librerías se importan correctamente
+3. Presiona el botón "Verificar/Compilar" (✓)
+4. Si no hay errores, presiona "Subir" (→)
+5. Espera a que termine la carga
+6. Abre el Monitor Serie (Herramientas → Monitor Serie)
+7. Configura la velocidad a: 115200 baudios
+
+
+⚠️ SOLUCIÓN DE PROBLEMAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ERROR: "WiFi.h: No such file or directory"
+SOLUCIÓN: Asegúrate de tener instalado el paquete ESP32 de Espressif
+
+ERROR: "A fatal error occurred: Failed to connect"
+SOLUCIÓN:
+  - Mantén presionado el botón BOOT mientras subes el código
+  - Verifica el puerto COM
+  - Prueba con otra velocidad de carga (921600 o 460800)
+
+ERROR: "DNSServer.h: No such file or directory"
+SOLUCIÓN:
+  - Comenta las líneas relacionadas con DNS (líneas 5, 9, 160-162, 178)
+  - O instala DNSServer manualmente desde GitHub
+
+ERROR: Brownout detector o reinicio constante
+SOLUCIÓN:
+  - Usa un cable USB de mejor calidad
+  - Conecta a un puerto USB con más potencia
+  - Usa una fuente de alimentación externa de 5V
+
+
+🌐 RED WIFI CREADA POR EL ESP32
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Una vez cargado el código, el ESP32 creará:
+
+📡 SSID: Mm_wifi
+🔑 Contraseña: 12345678
+🌍 IP del ESP32: 192.168.4.1
+
+Puedes acceder desde:
+  • http://192.168.4.1 (navegador web)
+  • http://magic.mazo (si DNS funciona)
+  • App Calculadora WiFi
+
+
+📝 NOTAS IMPORTANTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. El ESP32 debe estar encendido para que la red WiFi funcione
+2. La red es privada y solo acepta conexiones locales
+3. El truco de cartas usa WiFi beacon flooding (legal para demostraciones)
+4. No requiere conexión a Internet
+5. El consumo es bajo, puede funcionar con powerbank
+
+
+💡 PERSONALIZACIÓN (Opcional)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Puedes cambiar en el código ESP32_CODE.ino:
+
+Línea 8:  const char* AP_SSID = "Mm_wifi";
+          └─ Cambia el nombre de la red WiFi
+
+Línea 9:  const char* AP_PASSWORD = "12345678";
+          └─ Cambia la contraseña (mínimo 8 caracteres)
+
+Línea 10: const char* DOMINIO = "magic.mazo";
+          └─ Cambia el dominio DNS
+
+
+✅ VERIFICACIÓN FINAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Después de cargar el código, en el Monitor Serie deberías ver:
+
+  ==========================================
+  🎴 MOE HACK - SERVIDOR ACTIVO 🎴
+  ==========================================
+  📱 Conéctate al WiFi: Mm_wifi
+  🔑 Contraseña: 12345678
+  🌐 Ahora puedes usar:
+     → magic.mazo
+     → http://192.168.4.1
+     → Calculadora WiFi App
+  ==========================================
+
+Si ves este mensaje, ¡todo está funcionando correctamente! 🎉
+
+
+📧 SOPORTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Si tienes problemas:
+1. Revisa la sección de "Solución de Problemas"
+2. Verifica que el ESP32 Arduino Core esté actualizado
+3. Consulta la documentación oficial de ESP32
+
+
+═══════════════════════════════════════════════════════════════════
+
+Desarrollado por Elitemagic
+Proyecto: Calculadora WiFi - Truco de Cartas Mágico
