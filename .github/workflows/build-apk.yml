@@ -32,29 +32,15 @@ jobs:
     - name: Build with Gradle
       run: gradle assembleDebug --no-daemon --stacktrace
 
-    - name: Sign APK
-      uses: r0adkll/sign-android-release@v1
-      id: sign_app
-      with:
-        releaseDirectory: app/build/outputs/apk/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-      continue-on-error: true
-
-    - name: Rename unsigned APK
-      if: steps.sign_app.outcome == 'failure'
+    - name: Rename APK
       run: |
-        mv app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/CalculadoraWiFi-unsigned.apk || true
-        mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/CalculadoraWiFi.apk || true
+        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/CalculadoraWiFi.apk || true
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: CalculadoraWiFi-APK
-        path: |
-          app/build/outputs/apk/release/*.apk
+        path: app/build/outputs/apk/debug/CalculadoraWiFi.apk
         retention-days: 30
 
     - name: Create Release Info
